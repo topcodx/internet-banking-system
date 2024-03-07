@@ -86,6 +86,9 @@ $stmt->fetch();
 $stmt->close();
 //Get the remaining money in the accounts
 $TotalBalInAccount = ($iB_deposits)  - (($iB_withdrawal) + ($iB_Transfers));
+// $TotalBalInAccount = 0;
+
+
 
 
 //ibank money in the wallet

@@ -97,7 +97,7 @@ while ($sys = $res->fetch_object()) {
                     url: "pages_ajax.php",
                     data: 'iBankAccNumber=' + val,
                     success: function(data) {
-                        //alert(data);
+                        // alert(data);
                         $('#ReceivingAcc').val(data);
                     }
                 });

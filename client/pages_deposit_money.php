@@ -5,15 +5,18 @@ include('conf/checklogin.php');
 check_login();
 
 if (isset($_POST['deposit'])) {
+    
     $tr_code = $_POST['tr_code'];
     $account_id = $_GET['account_id'];
     $acc_name = $_POST['acc_name'];
     $account_number = $_GET['account_number'];
+
     $acc_type = $_POST['acc_type'];
     // $acc_amount  = $_POST['acc_amount'];
     $tr_type  = $_POST['tr_type'];
     $tr_status = $_POST['tr_status'];
     $client_id  = $_GET['client_id'];
+
     $client_name  = $_POST['client_name'];
     $client_national_id  = $_POST['client_national_id'];
     $transaction_amt = $_POST['transaction_amt'];
@@ -69,6 +72,7 @@ if (isset($_POST['deposit'])) {
         }   
     }   
     */
+    
 
 ?>
 <!DOCTYPE html>

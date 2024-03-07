@@ -37,17 +37,19 @@ if (isset($_POST['deposit'])) {
             */
     $result = "SELECT SUM(transaction_amt) FROM  ib_transactions  WHERE account_id=?";
     $stmt = $mysqli->prepare($result);
-    print_r(SUM(transaction_amt));
-    exit();
     $stmt->bind_param('i', $account_id);
     $stmt->execute();
     $stmt->bind_result($amt);
     $stmt->fetch();
     $stmt->close();
+
+   
     
 
-    if ($transaction_amt > $amt) {
-        $transaction_error  =  "You Do Not Have Sufficient Funds In Your Account For Transfer Your Current Account Balance Is $ $amt";
+    if ($transaction_amt > $amt) 
+    {
+        $transaction_error  =  "You Do Not Have Sufficient Funds In Your Account For Transfer Your Current Account Balance Is Rs $amt";
+       
     } else {
 
 
@@ -208,6 +210,7 @@ if (isset($_POST['deposit'])) {
 
                                                     </select>
                                                 </div>
+                                                <input type="hidden" name="rec_client_id" id="ReceiverClientId">
                                                 <div class=" col-md-4 form-group">
                                                     <label for="exampleInputPassword1">Receiving Account Name</label>
                                                     <input type="text" name="receiving_acc_name" required class="form-control" id="ReceivingAcc">
@@ -219,7 +222,7 @@ if (isset($_POST['deposit'])) {
 
                                                 <div class=" col-md-4 form-group" style="display:none">
                                                     <label for="exampleInputPassword1">Transaction Type</label>
-                                                    <input type="text" name="tr_type" value="Transfer" required class="form-control" id="exampleInputEmail1">
+                                                    <input type="text" name="tr_type" value="Transfer" required class="form-control" id="exampleInputEmail1" value="Transfer">
                                                 </div>
                                                 <div class=" col-md-4 form-group" style="display:none">
                                                     <label for="exampleInputPassword1">Transaction Status</label>
