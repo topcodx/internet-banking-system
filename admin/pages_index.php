@@ -67,6 +67,7 @@ while ($auth = $res->fetch_object()) {
                   <label for="remember">
                     Remember Me
                   </label> -->
+                  <a href="../index.php">Home</a>
                 </div>
               </div>
               <!-- /.col -->
