@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $dbuser="root";
-$dbpass="root";
+$dbpass="";
 $host="localhost";
-$db="internet_banking_system";
+$db="internetbanking";
 $mysqli=new mysqli($host,$dbuser, $dbpass, $db);

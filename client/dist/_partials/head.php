@@ -85,9 +85,20 @@ while ($sys = $res->fetch_object()) {
                     //get account transferable name
                     type: "POST",
                     url: "pages_ajax.php",
+                    data: 'iBankAccNumberClient=' + val,
+                    success: function(data) {
+                        // alert(data);
+                        $('#ReceiverClientId').val(data);
+                    }
+                });
+
+                $.ajax({
+                    //get account transferable name
+                    type: "POST",
+                    url: "pages_ajax.php",
                     data: 'iBankAccNumber=' + val,
                     success: function(data) {
-                        //alert(data);
+                        // alert(data);
                         $('#ReceivingAcc').val(data);
                     }
                 });

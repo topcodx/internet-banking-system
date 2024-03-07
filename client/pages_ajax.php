@@ -28,6 +28,20 @@ if (!empty($_POST["iBankAccNumber"])) {
     }
 }
 
+if (!empty($_POST["iBankAccNumberClient"])) {
+    //get  back account transferables name
+    $id = $_POST['iBankAccNumberClient'];
+    $stmt = $DB_con->prepare("SELECT * FROM ib_bankaccounts WHERE  account_number= :id");
+    $stmt->execute(array(':id' => $id));
+?>
+<?php
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+?>
+<?php echo htmlentities($row['client_id']); ?>
+<?php
+    }
+}
+
 if (!empty($_POST["iBankAccHolder"])) {
     //get  back account transferables name
     $id = $_POST['iBankAccHolder'];

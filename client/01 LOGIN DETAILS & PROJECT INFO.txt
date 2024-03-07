@@ -10,12 +10,20 @@
 **Admin Login Details**
 
 Email	: admin@mail.com
-Password: codeastro.com
+Password: admin
 
 
 **Staff Login Details**
 
 Email	: staff@mail.com
-Password: codeastro.com
+Password: staff
 
+** Client **
+Email: kaksha@gmail.com
+Password : 123
+account number : 253806419
 
+Email: shivani@gmail.com
+Password : 555
+account number : 145832769
+phone no.: 7862890685
