@@ -25,7 +25,7 @@ while ($sys = $res->fetch_object()) {
 
     <nav class="navbar navbar-lg navbar-expand-lg navbar-transparant navbar-dark navbar-absolute w-100">
         <div class="container">
-            <!-- <img src="dist/banklogo1.png" alt="" style="height:80px;width:80px;margin-right:10px;"> -->
+            <img src="dist/blogo.jpg" alt="" style="height:80px;width:80px;margin-right:10px;">
             <a class="navbar-brand" href="index.php"><?php echo $sys->sys_name; ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
