@@ -6,6 +6,8 @@ check_login();
 $client_id = $_SESSION['client_id'];
 
 if (isset($_POST['deposit'])) {
+    // print_r($_POST);
+    // exit();
     $tr_code = $_POST['tr_code'];
     $account_id = $_GET['account_id'];
     $acc_name = $_POST['acc_name'];
@@ -40,9 +42,6 @@ if (isset($_POST['deposit'])) {
     $stmt->bind_result($amt);
     $stmt->fetch();
     $stmt->close();
-
-
-
 
     if ($transaction_amt > $amt) {
         $transaction_error  =  "You Do Not Have Sufficient Funds In Your Account For Transfer Your Current Account Balance Is $ $amt";

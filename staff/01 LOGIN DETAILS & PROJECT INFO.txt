@@ -10,12 +10,12 @@
 **Admin Login Details**
 
 Email	: admin@mail.com
-Password: codeastro.com
+Password: admin
 
 
 **Staff Login Details**
 
 Email	: staff@mail.com
-Password: codeastro.com
+Password: staff
 
 

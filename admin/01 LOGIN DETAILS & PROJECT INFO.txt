@@ -10,15 +10,19 @@
 **Admin Login Details**
 
 Email	: admin@mail.com
-Password: codeastro.com
+Password: admin
 
 
 **Staff Login Details**
 
 Email	: staff@mail.com
-Password: codeastro.com
+Password: staff
 
+** add staff **
+Email : ratan@gmail.com
+Password : 888
 
-** Client **
-Email: kaksha@gmail.com
-Password : 123
+** add client **
+Email : vidhi01@gmail.com
+Password : 789
+
