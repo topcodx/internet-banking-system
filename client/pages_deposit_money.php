@@ -25,8 +25,8 @@ if (isset($_POST['deposit'])) {
 
 
     //Insert Captured information to a database table
-    $query = "INSERT INTO iB_Transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-    $notification = "INSERT INTO  iB_notifications (notification_details) VALUES (?)";
+    $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $notification = "INSERT INTO  ib_notifications (notification_details) VALUES (?)";
 
     $stmt = $mysqli->prepare($query);
     $notification_stmt = $mysqli->prepare($notification);
@@ -52,7 +52,7 @@ if (isset($_POST['deposit'])) {
        $acc_amount = $_POST['acc_amount'];
         
         //Insert Captured information to a database table
-        $query="UPDATE  iB_bankAccounts SET acc_amount=? WHERE account_id=?";
+        $query="UPDATE  ib_bankaccounts SET acc_amount=? WHERE account_id=?";
         $stmt = $mysqli->prepare($query);
         //bind paramaters
         $rc=$stmt->bind_param('si', $acc_amount, $account_id);
@@ -70,7 +70,7 @@ if (isset($_POST['deposit'])) {
     }   
     */
     $acc_amount = $_POST['transaction_amt'];
-    $update_query = "UPDATE iB_bankAccounts SET acc_amount = acc_amount + ? WHERE account_id = ?";
+    $update_query = "UPDATE ib_bankaccounts SET acc_amount = acc_amount + ? WHERE account_id = ?";
     $update_stmt = $mysqli->prepare($update_query);
     $update_stmt->bind_param('di', $acc_amount, $account_id);
     $update_stmt->execute();
@@ -99,7 +99,7 @@ if (isset($_POST['deposit'])) {
         <!-- Content Wrapper. Contains page content -->
         <?php
         $account_id = $_GET['account_id'];
-        $ret = "SELECT * FROM  iB_bankAccounts WHERE account_id = ? ";
+        $ret = "SELECT * FROM  ib_bankaccounts WHERE account_id = ? ";
         $stmt = $mysqli->prepare($ret);
         $stmt->bind_param('i', $account_id);
         $stmt->execute(); //ok
