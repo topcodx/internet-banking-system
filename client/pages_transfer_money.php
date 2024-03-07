@@ -37,11 +37,14 @@ if (isset($_POST['deposit'])) {
             */
     $result = "SELECT SUM(transaction_amt) FROM  ib_transactions  WHERE account_id=?";
     $stmt = $mysqli->prepare($result);
+    print_r(SUM(transaction_amt));
+    exit();
     $stmt->bind_param('i', $account_id);
     $stmt->execute();
     $stmt->bind_result($amt);
     $stmt->fetch();
     $stmt->close();
+    
 
     if ($transaction_amt > $amt) {
         $transaction_error  =  "You Do Not Have Sufficient Funds In Your Account For Transfer Your Current Account Balance Is $ $amt";
