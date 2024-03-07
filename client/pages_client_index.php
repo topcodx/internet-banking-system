@@ -83,7 +83,8 @@ while ($auth = $res->fetch_object()) {
 
 
           <p class="mb-0">
-            <a href="pages_client_signup.php" class="text-center">Register a new account</a>
+            <a href="pages_client_signup.php" class="text-center">Register a new account /</a>
+            <a href="../index.php">Home</a>
           </p><!-- Log on to codeastro.com for more projects! -->
 
         </div>

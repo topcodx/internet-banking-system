@@ -65,6 +65,7 @@ while ($auth = $res->fetch_object()) {
                   <input type="checkbox" id="remember">
                   <label for="remember">
                     Remember Me
+                  <a href="../index.php">Home</a>
                   </label>
                 </div>
               </div>
