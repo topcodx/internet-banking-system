@@ -17,13 +17,15 @@ if (isset($_POST['submit_request'])) {
 
     $checkQuery = "SELECT * FROM `ib_requests` WHERE `client_id` = '$client_id' AND `request_type` = '$request_type'";
     $checkStmt = mysqli_query($mysqli, $checkQuery);
+
 	if (mysqli_num_rows($checkStmt) > 0) {
 		$err = "You have already made a request for this type.";
     } else {
 
     //Insert Captured information to a database table
-    $query = "INSERT INTO `ib_requests` (`client_id`, `request_type`) VALUES ('$client_id', '$request_type');";
+    $query = "INSERT INTO `ib_requests` (`client_id`, `request_type`, `status`) VALUES ('$client_id', '$request_type', '0');";
 	$stmt = mysqli_query($mysqli,$query);
+
     // $stmt = $mysqli->prepare($query);
     //bind paramaters
     // $rc = $stmt->bind_param('sssssss', $name, $staff_number, $phone, $email, $password, $sex, $profile_pic);
@@ -180,9 +182,9 @@ if (isset($_POST['submit_request'])) {
 												<select class="form-control" name="requestType" id="selectRequestType"
 													required>
 													<option value="" disabled selected>Select Type</option>
-													<option value="chequeBook">Cheque Book</option>
-													<option value="ATMCard">ATM Card</option>
-													<option value="debitCard">Debit Card</option>
+													<option value="Cheque Book">Cheque Book</option>
+													<option value="ATM Card">ATM Card</option>
+													<option value="Debit Card">Debit Card</option>
 												</select>
 												<!-- Display an error message if the selection is not valid -->
 												<div class="invalid-feedback">
