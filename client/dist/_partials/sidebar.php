@@ -86,6 +86,17 @@
             </li>
             <!-- ./Account-->
 
+            <!--Recharge -->
+            <li class="nav-item">
+              <a href="pages_mobile_recharge.php" class="nav-link">
+                <i class="nav-icon fas fa-user-tie"></i>
+                <p>
+                  Recharge
+                </p>
+              </a>
+            </li>
+            <!-- ./Recharge-->
+
             <!--iBank Accounts-->
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
