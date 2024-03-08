@@ -75,7 +75,7 @@
             </li>
             <!-- ./Account-->
 
-			<!--Account -->
+			<!--Request -->
             <li class="nav-item">
               <a href="pages_request.php" class="nav-link">
                 <i class="nav-icon fas fa-user-tie"></i>
@@ -84,7 +84,7 @@
                 </p>
               </a>
             </li>
-            <!-- ./Account-->
+            <!-- ./Request-->
 
             <!--iBank Accounts-->
             <li class="nav-item has-treeview">

@@ -1,17 +1,13 @@
 <?php
-error_reporting(E_ALL);
-error_reporting(-1);
-ini_set('error_reporting', E_ALL);
 
 session_start();
 include('conf/config.php');
 include('conf/checklogin.php');
 check_login();
 $client_id = $_SESSION['client_id'];
-// echo $client_id;
-// check request_type  after insert 
+// check request_type  after insert
 if (isset($_POST['submit_request'])) {
-    
+
 	$client_id = $_SESSION['client_id'];
 	$request_type = $_POST['requestType'];
 
@@ -26,15 +22,10 @@ if (isset($_POST['submit_request'])) {
     $query = "INSERT INTO `ib_requests` (`client_id`, `request_type`, `status`) VALUES ('$client_id', '$request_type', '0');";
 	$stmt = mysqli_query($mysqli,$query);
 
-    // $stmt = $mysqli->prepare($query);
-    //bind paramaters
-    // $rc = $stmt->bind_param('sssssss', $name, $staff_number, $phone, $email, $password, $sex, $profile_pic);
-    // $stmt->execute();
-
     //declare a varible which will be passed to alert function
     if ($stmt) {
         $success = "Sent Successfully";
-	
+
     } else {
         $err = "Please Try Again Or Try Later";
     }
@@ -68,8 +59,7 @@ if (isset($_POST['submit_request'])) {
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a href="pages_dashboard.php">Dashboard</a></li>
-								<li class="breadcrumb-item"><a href="pages_add_staff.php">iBanking Staff</a></li>
-								<li class="breadcrumb-item active">Add</li>
+								<li class="breadcrumb-item active">Add request</li>
 							</ol>
 						</div>
 					</div>
@@ -89,11 +79,7 @@ if (isset($_POST['submit_request'])) {
 									<thead>
 										<tr>
 											<th>sr no</th>
-											<!-- <th>Name</th>
-											<th>Staff Number</th>
-											<th>Contact</th>
-											<th>Email</th>
-											<th>Gender</th> -->
+
 											<th>Request type</th>
 											<th>Status</th>
 										</tr>
@@ -107,22 +93,27 @@ if (isset($_POST['submit_request'])) {
                     $res = $stmt->get_result();
                     $cnt = 1;
                     while ($row = $res->fetch_object()) {
-
                     ?>
 										<tr>
 											<td><?php echo $cnt; ?></td>
-
 											<td><?php echo $row-> request_type; ?></td>
-
 											<td>
-												<a class="btn btn-warning btn-sm" href="#">
-													<i class="fas fa-info-circle"></i>
-													Pending
-												</a>
-
-
+												<?php
+												if ($row->status == 1) {
+													// If status is 1, display "Approved"
+													echo '<a class="btn btn-success btn-sm" href="#">
+															<i class="fas fa-check-circle"></i>
+															Approved
+														</a>';
+												} else {
+													// If status is not 1, display "Pending" with request_type and client_id
+													echo '<a class="btn btn-warning btn-sm" href="#">
+															<i class="fas fa-info-circle"></i>
+															Pending 
+														</a>';
+												}
+												?>
 											</td>
-
 										</tr>
 										<?php $cnt = $cnt + 1;
                     } ?>
@@ -153,23 +144,7 @@ if (isset($_POST['submit_request'])) {
 								<!-- form start -->
 								<form method="post" enctype="multipart/form-data" role="form">
 									<div class="card-body">
-										<!-- <div class="row">
-                                            <div class=" col-md-6 form-group">
-                                                <label for="exampleInputEmail1">Staff Name</label>
-                                                <input type="text" name="name" required class="form-control" id="exampleInputEmail1">
-                                            </div>
-                                            <div class=" col-md-6 form-group">
-                                                <label for="exampleInputPassword1">Staff Number</label>
-                                                <?php
-                                                //PHP function to generate random passenger number
-                                                // $length = 4;
-                                                // $_staffNumber =  substr(str_shuffle('0123456789'), 1, $length);
-                                                ?>
-										<input type="text" readonly name="staff_number"
-											value="iBank-STAFF-<?php echo $_staffNumber; ?>" class="form-control"
-											id="exampleInputPassword1">
-							</div>
-						</div> -->
+
 
 										<div class="row">
 											<div class=" col-md-6 form-group">
@@ -194,29 +169,6 @@ if (isset($_POST['submit_request'])) {
 
 										</div>
 
-										<!-- <div class="row">
-                                            <div class=" col-md-6 form-group">
-                                                <label for="exampleInputEmail1">Staff Email</label>
-                                                <input type="email" name="email" required class="form-control" id="exampleInputEmail1">
-                                            </div>
-                                            <div class=" col-md-6 form-group">
-                                                <label for="exampleInputPassword1">Staff Password</label>
-                                                <input type="password" name="password" required class="form-control" id="exampleInputEmail1">
-                                            </div>
-                                        </div> -->
-
-										<!-- <div class="form-group">
-                                            <label for="exampleInputFile">Staff Profile Picture</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" name="profile_pic" class="custom-file-input" id="exampleInputFile">
-                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text" id="">Upload</span>
-                                                </div>
-                                            </div>
-                                        </div> -->
 									</div>
 									<!-- /.card-body -->
 									<div class="card-footer">
@@ -261,18 +213,43 @@ if (isset($_POST['submit_request'])) {
 	</script>
 	<!-- page script -->
 	<script>
-	$(function() {
-		$("#example1").DataTable();
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"searching": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-		});
-	});
-	</script>
+        $(function() {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+
+			$(".approve-btn").click(function() {
+                var $row = $(this).closest('tr');
+                var client_id = $(this).data('client-id');
+                var request_type = $(this).data('request-type');
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'pages_request.php',
+                    data: {
+                        client_id: client_id,
+                        request_type: request_type,
+                        Approve: true
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+
+       
+    </script>
+
 </body>
 
 </html>
