@@ -50,7 +50,6 @@ if (isset($_POST['deposit'])) {
     } else {
 
 
-        //Insert Captured information to a database table
         $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone, receiving_acc_no, receiving_acc_name, receiving_acc_holder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $notification = "INSERT INTO  ib_notifications (notification_details) VALUES (?)";
 

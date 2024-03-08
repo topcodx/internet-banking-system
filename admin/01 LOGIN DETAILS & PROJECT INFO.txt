@@ -20,7 +20,7 @@ Password: staff
 
 ** add staff **
 Email : ratan@gmail.com
-Password : 888
+Password : 789
 
 ** add client **
 Email : vidhi01@gmail.com
