@@ -284,6 +284,27 @@ INSERT INTO `ib_requests` (`id`, `client_id`, `request_type`, `status`) VALUES
 
 -- --------------------------------------------------------
 
+
+--
+-- Table structure for table `ib_requests`
+--
+
+CREATE TABLE `ib_recharges` (
+  `id` int NOT NULL,
+  `client_id` int NOT NULL,
+  `transaction_id` int NOT NULL,
+  `type` varchar(200) NOT NULL,
+  `amount` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ib_requests`
+--
+
+
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `ib_staff`
 --

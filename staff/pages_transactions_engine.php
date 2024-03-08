@@ -107,9 +107,9 @@ if (isset($_GET['RollBack_Transaction'])) {
                         <td><?php echo $row->tr_code; ?></a></td>
                         <td><?php echo $row->account_number; ?></td>
                         <td><?php echo $alertClass; ?></td>
-                        <td>$ <?php echo $row->transaction_amt; ?></td>
+                        <td>Rs. <?php echo $row->transaction_amt; ?></td>
                         <td><?php echo $row->client_name; ?></td>
-                        <td><?php echo date("d-M-Y h:m:s ", strtotime($transTstamp)); ?></td>
+                        <td><?php echo $row -> created_at; ?></td>
                         <td>
                           <a class="btn btn-danger btn-sm" href="pages_transactions_engine.php?RollBack_Transaction=<?php echo $row->tr_id; ?>">
                             <i class="fas fa-power-off"></i>
