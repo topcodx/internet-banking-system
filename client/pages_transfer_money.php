@@ -67,7 +67,27 @@ if (isset($_POST['deposit'])) {
         $stmt->execute();
         $notification_stmt->execute();
 
+        // Get receiving client id
+        $sqlBankAccount = "SELECT * FROM ib_bankaccounts WHERE account_number=$receiving_acc_no";
+        $result = $mysqli->query($sqlBankAccount);
 
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            //Insert Captured information to a database table
+            $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone, receiving_acc_no, receiving_acc_name, receiving_acc_holder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $stmtTransaction = $mysqli->prepare($query);
+    
+            $trType = 'Deposit';
+            //PHP function to generate random account number
+            $length = 20;
+            $transCode =  substr(str_shuffle('0123456789QWERgfdsazxcvbnTYUIOqwertyuioplkjhmPASDFGHJKLMNBVCXZ'), 1, $length);
+
+            //bind paramaters
+            $rcTransaction = $stmtTransaction->bind_param('sssssssssssssss', $transCode, $account_id, $acc_name, $account_number, $acc_type, $trType, $tr_status, $row['client_id'], $client_name, $client_national_id, $transaction_amt, $client_phone, $receiving_acc_no, $receiving_acc_name, $receiving_acc_holder);
+            $stmtTransaction->execute();
+        }
+    
         //declare a varible which will be passed to alert function
         if ($stmt && $notification_stmt) {
             $success = "Money Transfered";
