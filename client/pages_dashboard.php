@@ -341,7 +341,7 @@ $stmt->close();
                             <td><?php echo $alertClass; ?></td>
                             <td>Rs. <?php echo $row->transaction_amt; ?></td>
                             <td><?php echo $row->client_name; ?></td>
-                            <td><?php echo date("d-M-Y h:m:s ", strtotime($transTstamp)); ?></td>
+                            <td><?php echo $row->created_at; ?></td>
                           </tr>
 
                         <?php } ?>

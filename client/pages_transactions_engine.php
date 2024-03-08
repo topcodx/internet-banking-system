@@ -91,7 +91,7 @@ if (isset($_GET['RollBack_Transaction'])) {
                       /* Trim Transaction Timestamp to 
                             *  User Uderstandable Formart  DD-MM-YYYY :
                             */
-                      $transTstamp = $row->created_at;
+                      //$transTstamp = $row->created_at;
                       //Perfom some lil magic here
                       if ($row->tr_type == 'Deposit') {
                         $alertClass = "<span class='badge badge-success'>$row->tr_type</span>";
@@ -109,7 +109,7 @@ if (isset($_GET['RollBack_Transaction'])) {
                         <td><?php echo $alertClass; ?></td>
                         <td>$ <?php echo $row->transaction_amt; ?></td>
                         <td><?php echo $row->client_name; ?></td>
-                        <td><?php echo date("d-M-Y h:m:s ", strtotime($transTstamp)); ?></td>
+                        <td><?php echo $row->created_at; ?></td>
 
                       </tr>
                     <?php $cnt = $cnt + 1;
