@@ -13,12 +13,19 @@ if (isset($_POST['Approve'])) {
     // Update the ib_requests table
     $sql = "UPDATE `ib_requests` SET `status` = '1' WHERE `client_id` = '$client_id' AND `request_type` = '$request_type'";
     $result1 = mysqli_query($mysqli, $sql);
+
  if ($result1) {
         $info = "Request Approved";
         echo json_encode(array('status' => 1, 'message' => $info));
     } else {
         $err = "Failed to approve request";
         echo json_encode(array('status' => 0, 'message' => $err));
+    }
+    
+    if ($sql && $result1) {
+        $success = "Money Transfered";
+    } else {
+        $err = "Please Try Again Or Try Later";
     }
 } 
 ?>	
