@@ -9,8 +9,8 @@ if(isset($_POST['action']) && $_POST['action']='payOrder'){
  
 $razorpay_mode='test';
  
-$razorpay_test_key='rzp_test_j0MoZqbuOl3ugQ'; //Your Test Key
-$razorpay_test_secret_key='XVJ3IF6aFPFDm3qU8WeQKRq9'; //Your Test Secret Key
+$razorpay_test_key='rzp_test_2KJs2lsOVQXGZh'; //Your Test Key
+$razorpay_test_secret_key='Z0qG2s24FgF3CjYvcIxCAmgX'; //Your Test Secret Key
  
 $razorpay_live_key= 'Your_Live_Key';
 $razorpay_live_secret_key='Your_Live_Secret_Key';
@@ -39,7 +39,8 @@ $shipping_mobile=$_POST['shipping_mobile'];
 $shipping_email=$_POST['shipping_email'];
 $paymentOption=$_POST['paymentOption'];
 $payAmount=$_POST['payAmount'];
- 
+
+
 $note="Payment of amount Rs. ".$payAmount;
  
 $postdata=array(
@@ -51,6 +52,7 @@ $postdata=array(
 	          "notes_key_2"=> ""
               )
 );
+
 $curl = curl_init();
 
  
@@ -73,7 +75,7 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 curl_close($curl);
 $orderRes= json_decode($response);
- 
+
 if(isset($orderRes->id)){
  
 $rpay_order_id=$orderRes->id;
