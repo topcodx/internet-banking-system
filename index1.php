@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>How to Integrate Razorpay payment gateway in PHP | tutorialswebsite.com</title>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -41,7 +41,7 @@
                     </div>
 
                     <!-- submit button -->
-                    <button id="PayNow" class="btn btn-success btn-lg btn-block">Submit & Pay</button>
+                    <button id="PayNow" class="btn btn-success btn-lg btn-block" class="action">Submit & Pay</button>
 
                 </div>
             </div>
@@ -53,7 +53,6 @@
     jQuery(document).ready(function ($) {
 
         jQuery('#PayNow').click(function (e) {
-                console.log('cliced ====');
                 var paymentOption = '';
                 let billing_name = $('#billing_name').val();
                 let billing_mobile = $('#billing_mobile').val();
@@ -84,7 +83,6 @@
                     dataType: 'json',
                     encode: true,
                 }).done(function (data) {
-                    console.log('data ========', data);
 
                     if (data.res == 'success') {
 
@@ -121,7 +119,6 @@
                                         "banks": {
                                             "name": 'Pay using ' + paymentOption,
                                             "instruments": [
-
                                                 {
                                                     "method": paymentOption
                                                 },
@@ -148,9 +145,7 @@
                         e.preventDefault();
                     }
 
-                }).fail(function (error) {
-                    console.log("AJAX request failed: ", error);
-                });
+                });               
             }
         );
     });

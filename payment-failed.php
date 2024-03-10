@@ -1,6 +1,6 @@
 <?php
     if(isset($_GET)) {
-        echo "<pre>";
+        echo "<p>";
         print_r($_GET);
         echo "</p>";
     }
