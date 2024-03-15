@@ -63,7 +63,7 @@ while ($sys = $res->fetch_object()) {
                             <?php echo $sys->sys_tagline; ?>
                         </p>
                         <br>
-                        <a class="btn btn-success btn-lg mr-lg-2 my-1" target="_blank"
+                        <a class="btn btn-success btn-lg mr-lg-2 my-1"
                             href="client/pages_client_signup.php" role="button">Get started</a>
                     </div>
                 </div>

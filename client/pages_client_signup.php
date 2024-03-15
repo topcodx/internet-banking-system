@@ -4,7 +4,7 @@ include('conf/config.php');
 
 //register new account
 if (isset($_POST['create_account'])) {
-  //Register  Client
+  //Register Client
   $name = $_POST['name'];
   $national_id = $_POST['national_id'];
   $client_number = $_POST['client_number'];
@@ -13,14 +13,11 @@ if (isset($_POST['create_account'])) {
   $password = sha1(md5($_POST['password']));
   $address  = $_POST['address'];
 
-  //$profile_pic  = $_FILES["profile_pic"]["name"];
-  //move_uploaded_file($_FILES["profile_pic"]["tmp_name"],"dist/img/".$_FILES["profile_pic"]["name"]);
-
   //Insert Captured information to a database table
-  $query = "INSERT INTO ib_clients (name, national_id, client_number, phone, email, password, address) VALUES (?,?,?,?,?,?,?)";
+  $query = "INSERT INTO ib_client (name, national_id, client_number, phone, email, password, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
   $stmt = $mysqli->prepare($query);
-  //bind paramaters
-  $rc = $stmt->bind_param('sssssss', $name, $national_id, $client_number, $phone, $email, $password, $address);
+  //bind parameters
+  $stmt->bind_param('sssssss', $name, $national_id, $client_number, $phone, $email, $password, $address);
   $stmt->execute();
 
   //declare a varible which will be passed to alert function
@@ -70,7 +67,7 @@ while ($auth = $res->fetch_object()) {
                 </div>
               </div>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group mb-3" style="display:none;">
               <?php
               //PHP function to generate random
               $length = 4;

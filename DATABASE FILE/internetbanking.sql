@@ -459,6 +459,62 @@ INSERT INTO `ib_transactions` (`tr_id`, `tr_code`, `account_id`, `acc_name`, `ac
 (114, 'TgHpJFfCjvYw3P14Qoyt', '22', 'Shivani', '145832769', 'Current account ', NULL, 'Transfer', 'Success ', '10\r\n\r\n', 'Shivani Godhani', '155478', '200', '7862890685', '253806419', 'Kaksha', 'kaksha Dhanani'),
 (115, 'IEBXJRND5wYjxiMLtdFZ', '22', 'Shivani', '145832769', 'Current account ', NULL, 'Transfer', 'Success ', '14', 'Shivani Godhani', '155478', '200', '7862890685', '253806419', 'Kaksha', 'kaksha Dhanani');
 
+
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Mar 15, 2024 at 11:18 AM
+-- Server version: 5.7.40
+-- PHP Version: 8.0.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `internetbanking`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ib_client`
+--
+
+DROP TABLE IF EXISTS `ib_client`;
+CREATE TABLE IF NOT EXISTS `ib_client` (
+  `client_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `national_id` varchar(200) NOT NULL,
+  `client_number` varchar(200) NOT NULL,
+  `phone` varchar(200) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  PRIMARY KEY (`client_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ib_client`
+--
+
+INSERT INTO `ib_client` (`client_id`, `name`, `national_id`, `client_number`, `phone`, `address`, `email`, `password`) VALUES
+(1, 'Ankita Dave', '155478', 'iBank-CLIENT-9236', '9979944122', 'Delhi get', 'anku@gmail.com', '0e7bbcbe58d1654d7218d5648faece9235df327d');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 --
 -- Indexes for dumped tables
 --
