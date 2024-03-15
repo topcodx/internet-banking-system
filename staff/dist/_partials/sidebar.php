@@ -77,7 +77,7 @@
            <!--Request -->
 				<li class="nav-item">
               <a href="pages_request.php" class="nav-link">
-              <i class="fa fa-credit-card" aria-hidden="true"></i>
+              <i class="nav-icon fa fa-credit-card" aria-hidden="true"></i>
                 <p>
                   Request
                 </p>

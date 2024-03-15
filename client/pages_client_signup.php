@@ -70,7 +70,7 @@ while ($auth = $res->fetch_object()) {
                 </div>
               </div>
             </div>
-            <div class="input-group mb-3" style="display:none">
+            <div class="input-group mb-3">
               <?php
               //PHP function to generate random
               $length = 4;
@@ -99,7 +99,7 @@ while ($auth = $res->fetch_object()) {
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="email" name="email" required class="form-control" placeholder="Client Address">
+              <input type="email" name="email" required class="form-control" placeholder="Client Email Address">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -126,7 +126,7 @@ while ($auth = $res->fetch_object()) {
           </form>
 
           <p class="mb-0">
-            <a href="pages_client_index.php" class="text-center">Login</a>
+            <a href="../index.php" class="text-center">Home</a>
           </p>
 
         </div>

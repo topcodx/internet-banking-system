@@ -22,13 +22,6 @@ if (isset($_POST['submit_request'])) {
     $query = "INSERT INTO `ib_requests` (`client_id`, `request_type`, `status`) VALUES ('$client_id', '$request_type', '0');";
 	$stmt = mysqli_query($mysqli,$query);
 
-    //declare a varible which will be passed to alert function
-    if ($stmt) {
-        $success = "Sent Successfully";
-
-    } else {
-        $err = "Please Try Again Or Try Later";
-    }
 	}
 }
 ?>

@@ -197,7 +197,7 @@ if (isset($_POST['change_client_password'])) {
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                     </div>
                     </div>
-                    <!-- /.card --><!-- Log on to codeastro.com for more projects! -->
+                    /.card --><!-- Log on to codeastro.com for more projects! -->
                             </div>
 
                             <!-- /.col -->

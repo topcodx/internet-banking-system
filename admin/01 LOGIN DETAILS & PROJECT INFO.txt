@@ -9,7 +9,7 @@
 
 **Admin Login Details**
 
-Email	: admin@mail.com
+Email	: admin@gmail.com
 Password: admin
 
 
@@ -23,6 +23,8 @@ Email : ratan@gmail.com
 Password : 789
 
 ** add client **
-Email : vidhi01@gmail.com
-Password : 789
+Email : shivani@gmail.com
+Password : 222
 
+Email : kaksha@gmail.com
+Password : 111

@@ -78,7 +78,7 @@
 			<!--Request -->
             <li class="nav-item">
               <a href="pages_request.php" class="nav-link">
-              <i class="fa fa-credit-card" aria-hidden="true"></i>
+              <i class="nav-icon fa fa-credit-card" aria-hidden="true"></i>
                 <p>
                   Request
                 </p>
@@ -87,14 +87,14 @@
             <!-- ./Request-->
 
             <!--Recharge -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="pages_mobile_recharge.php" class="nav-link">
                 <i class="nav-icon fas fa-user-tie"></i>
                 <p>
                   Recharge
                 </p>
               </a>
-            </li>
+            </li> -->
             <!-- ./Recharge-->
 
             <!--iBank Accounts-->

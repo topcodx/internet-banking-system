@@ -44,7 +44,7 @@ while ($sys = $res->fetch_object()) {
                         <a class="nav-link" href="client/pages_client_index.php">Client Portal</a>
                     </li>
                 </ul>
-                <a class="btn btn-danger" href="client/pages_client_signup.php">Join Us</a>
+                <!-- <a class="btn btn-danger" href="client/pages_client_signup.php">Join Us</a> -->
             </div>
         </div>
     </nav>

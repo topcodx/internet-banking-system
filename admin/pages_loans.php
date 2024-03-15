@@ -5,7 +5,7 @@ include('conf/checklogin.php');
 check_login();
 $admin_id = $_SESSION['admin_id'];
 
-?>
+// ?>
 <!-- Log on to codeastro.com for more projects! -->
 <!DOCTYPE html>
 <html>
@@ -92,7 +92,7 @@ $admin_id = $_SESSION['admin_id'];
 
                           <a class="btn btn-danger btn-sm" href="pages_manage_clients.php?deleteClient=<?php echo $row->client_id; ?>">
                             <i class="fas fa-trash"></i>
-                            <!-- <i class="fas fa-user"></i> -->
+                              <!-- <i class="fas fa-user"></i> -->
                             Delete
                           </a>
 

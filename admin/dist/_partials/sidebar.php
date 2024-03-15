@@ -77,7 +77,7 @@
 				<!--Request -->
 				<li class="nav-item">
               <a href="pages_request.php" class="nav-link">
-               <i class="fa fa-credit-card" aria-hidden="true"></i>               
+               <i class="nav-icon fas fa-credit-card" aria-hidden="true"></i>               
                 <p>
                   Request
                 </p>
@@ -112,7 +112,7 @@
             <!-- ./iBank staff-->
 
             <!--Clients -->
-            <li class="nav-item has-treeview">
+            <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
@@ -126,15 +126,15 @@
                     <i class="fas fa-user-plus nav-icon"></i>
                     <p>Add Client</p>
                   </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                   <a href="pages_manage_clients.php" class="nav-link">
                     <i class="fas fa-user-cog nav-icon"></i>
                     <p>Manage Clients</p>
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <!-- ./ Clients -->
 
             <!--iBank Accounts-->
@@ -159,7 +159,7 @@
                     <p>Manage Acc Types</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="pages_open_acc.php" class="nav-link">
                     <i class="fas fa-lock-open nav-icon"></i>
                     <p>Open  Acc</p>
@@ -170,20 +170,20 @@
                     <i class="fas fa-cog nav-icon"></i>
                     <p>Manange Acc Openings</p>
                   </a>
-                </li>
+                </li> -->
               </ul>
             </li>
             <!--./ iBank Acounts-->
 
             <!--Finances-->
-            <li class="nav-item has-treeview">
+            <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-dollar-sign"></i>
                 <p>
                   Finances
                   <i class="fas fa-angle-left right"></i>
                 </p>
-              </a>
+              </a> -->
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="pages_deposits.php" class="nav-link">

@@ -21,12 +21,6 @@ if (isset($_POST['Approve'])) {
         $err = "Failed to approve request";
         echo json_encode(array('status' => 0, 'message' => $err));
     }
-    
-    if ($sql && $result1) {
-        $success = "Money Transfered";
-    } else {
-        $err = "Please Try Again Or Try Later";
-    }
 } 
 ?>	
 
@@ -225,6 +219,10 @@ if (isset($_POST['Approve'])) {
                 });
             });
         });
+
+        $(document).ready(function){
+            $()
+        }
     </script>
 </body>
 
