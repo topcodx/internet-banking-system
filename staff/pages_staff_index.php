@@ -73,6 +73,9 @@ while ($auth = $res->fetch_object()) {
               <div class="col-4">
                 <button type="submit" name="login" class="btn btn-success btn-block">Log In</button>
               </div>
+              <p class="mb-1">
+                            <a href="pages_reset_pwd.php">Forgot password</a>
+                        </p>
               <!-- /.col -->
             </div>
           </form>

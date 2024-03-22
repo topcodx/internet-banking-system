@@ -86,7 +86,10 @@ while ($auth = $res->fetch_object()) {
             <a href="pages_client_signup.php" class="text-center">Register a new account /</a>
             <a href="../index.php">Home</a>
           </p><!-- Log on to codeastro.com for more projects! -->
-
+          <br>
+          <p class="mb-1">
+                            <a href="pages_reset_pwd.php">Forgot password</a>
+                        </p>
         </div>
         <!-- /.login-card-body -->
       </div>
