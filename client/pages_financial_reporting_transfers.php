@@ -160,10 +160,7 @@ $client_id = $_SESSION['client_id'];
     $('#export').DataTable({
       dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
       buttons: {
-        buttons: [{
-            extend: 'copy',
-            className: 'btn'
-          },
+        buttons: [
           {
             extend: 'csv',
             className: 'btn'

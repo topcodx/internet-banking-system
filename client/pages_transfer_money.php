@@ -6,100 +6,83 @@ check_login();
 $client_id = $_SESSION['client_id'];
 
 if (isset($_POST['deposit'])) {
-    // print_r($_POST);
-    // exit();
-    $tr_code = $_POST['tr_code'];
-    $account_id = $_GET['account_id'];
-    $acc_name = $_POST['acc_name'];
-    $account_number = $_GET['account_number'];
-    $acc_type = $_POST['acc_type'];
-    //$acc_amount  = $_POST['acc_amount'];
-    $tr_type  = $_POST['tr_type'];
-    $tr_status = $_POST['tr_status'];
-    $client_id  = $_GET['client_id'];
-    $client_name  = $_POST['client_name'];
-    $client_national_id  = $_POST['client_national_id'];
     $transaction_amt = $_POST['transaction_amt'];
-    $client_phone = $_POST['client_phone'];
 
-    //Few fields to hold funds transfers
-    $receiving_acc_no = $_POST['receiving_acc_no'];
-    $receiving_acc_name = $_POST['receiving_acc_name'];
-    $receiving_acc_holder = $_POST['receiving_acc_holder'];
-
-    //Notication
-    $notification_details = "$client_name Has Transfered $ $transaction_amt From Bank Account $account_number To Bank Account $receiving_acc_no";
-
-
-    /*
-            *You cant transfer money from an bank account that has no money in it so
-            *Lets Handle that here.
-            */
-    $result = "SELECT SUM(transaction_amt) FROM  ib_transactions  WHERE account_id=?";
-    $stmt = $mysqli->prepare($result);
-    $stmt->bind_param('i', $account_id);
-    $stmt->execute();
-    $stmt->bind_result($amt);
-    $stmt->fetch();
-    $stmt->close();
-
-   
-    
-
-    if ($transaction_amt > $amt) 
-    {
-        $transaction_error  =  "You Do Not Have Sufficient Funds In Your Account For Transfer Your Current Account Balance Is Rs $amt";
-       
+    // Validate transaction amount
+    if ($transaction_amt <= 0) {
+        $err = "Please enter a valid amount greater than 0 for transfer.";
     } else {
+        $tr_code = $_POST['tr_code'];
+        $account_id = $_GET['account_id'];
+        $acc_name = $_POST['acc_name'];
+        $account_number = $_GET['account_number'];
+        $acc_type = $_POST['acc_type'];
+        $tr_type = $_POST['tr_type'];
+        $tr_status = $_POST['tr_status'];
+        $client_id = $_GET['client_id'];
+        $client_name = $_POST['client_name'];
+        $client_national_id = $_POST['client_national_id'];
+        $client_phone = $_POST['client_phone'];
+        $receiving_acc_no = $_POST['receiving_acc_no'];
+        $receiving_acc_name = $_POST['receiving_acc_name'];
+        $receiving_acc_holder = $_POST['receiving_acc_holder'];
+        $notification_details = "$client_name Has Transferred $$transaction_amt From Bank Account $account_number To Bank Account $receiving_acc_no";
 
-
-        //Insert Captured information to a database table
-        $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone, receiving_acc_no, receiving_acc_name, receiving_acc_holder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $notification = "INSERT INTO  ib_notifications (notification_details) VALUES (?)";
-
-        $stmt = $mysqli->prepare($query);
-        $notification_stmt = $mysqli->prepare($notification);
-
-        //bind paramaters
-        $rc = $stmt->bind_param('sssssssssssssss', $tr_code, $account_id, $acc_name, $account_number, $acc_type, $tr_type, $tr_status, $client_id, $client_name, $client_national_id, $transaction_amt, $client_phone, $receiving_acc_no, $receiving_acc_name, $receiving_acc_holder);
-        $rc = $notification_stmt->bind_param('s', $notification_details);
-
+        // Get the total amount in the account
+        $result = "SELECT SUM(transaction_amt) FROM ib_transactions WHERE account_id=?";
+        $stmt = $mysqli->prepare($result);
+        $stmt->bind_param('i', $account_id);
         $stmt->execute();
-        $notification_stmt->execute();
+        $stmt->bind_result($amt);
+        $stmt->fetch();
+        $stmt->close();
 
-        // Get receiving client id
-        $sqlBankAccount = "SELECT * FROM ib_bankaccounts WHERE account_number=$receiving_acc_no";
-        $result = $mysqli->query($sqlBankAccount);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-
-            //Insert Captured information to a database table
-            $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone, receiving_acc_no, receiving_acc_name, receiving_acc_holder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            $stmtTransaction = $mysqli->prepare($query);
-    
-            $trType = 'Deposit';
-            //PHP function to generate random account number
-            $length = 20;
-            $transCode =  substr(str_shuffle('0123456789QWERgfdsazxcvbnTYUIOqwertyuioplkjhmPASDFGHJKLMNBVCXZ'), 1, $length);
-
-            //bind paramaters
-            $rcTransaction = $stmtTransaction->bind_param('sssssssssssssss', $transCode, $account_id, $acc_name, $account_number, $acc_type, $trType, $tr_status, $row['client_id'], $client_name, $client_national_id, $transaction_amt, $client_phone, $receiving_acc_no, $receiving_acc_name, $receiving_acc_holder);
-            $stmtTransaction->execute();
-        }
-    
-        //declare a varible which will be passed to alert function
-        if ($stmt && $notification_stmt) {
-            $success = "Money Transfered";
+        // Validate if total balance will be sufficient for the transfer
+        if ($transaction_amt > $amt) {
+            // Set JavaScript variable for alert message
+            // echo "<script>var alertMessage = 'You Do Not Have Sufficient Funds In Your Account For Transfer. Your Current Account Balance Is Rs.$amt';</script>";
+    $err = "You Do Not Have Sufficient Funds In Your Account For Transfer. Your Current Account Balance Is Rs. $amt";
         } else {
-            $err = "Please Try Again Or Try Later";
+            // Proceed with the transfer process
+            $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone, receiving_acc_no, receiving_acc_name, receiving_acc_holder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $notification = "INSERT INTO ib_notifications (notification_details) VALUES (?)";
+            $stmt = $mysqli->prepare($query);
+            $notification_stmt = $mysqli->prepare($notification);
+            $rc = $stmt->bind_param('sssssssssssssss', $tr_code, $account_id, $acc_name, $account_number, $acc_type, $tr_type, $tr_status, $client_id, $client_name, $client_national_id, $transaction_amt, $client_phone, $receiving_acc_no, $receiving_acc_name, $receiving_acc_holder);
+            $rc = $notification_stmt->bind_param('s', $notification_details);
+            $stmt->execute();
+            $notification_stmt->execute();
+
+            // Check if the receiving account exists and insert the transaction record for it
+            $sqlBankAccount = "SELECT * FROM ib_bankaccounts WHERE account_number=?";
+            $stmtBankAccount = $mysqli->prepare($sqlBankAccount);
+            $stmtBankAccount->bind_param('s', $receiving_acc_no);
+            $stmtBankAccount->execute();
+            $resultBankAccount = $stmtBankAccount->get_result();
+
+            if ($resultBankAccount->num_rows > 0) {
+                $rowBankAccount = $resultBankAccount->fetch_assoc();
+                $trType = 'Deposit';
+                $transCode = substr(str_shuffle('0123456789QWERgfdsazxcvbnTYUIOqwertyuioplkjhmPASDFGHJKLMNBVCXZ'), 1, 20);
+
+                $queryTransfer = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone, receiving_acc_no, receiving_acc_name, receiving_acc_holder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $stmtTransfer = $mysqli->prepare($queryTransfer);
+                $rcTransfer = $stmtTransfer->bind_param('sssssssssssssss', $transCode, $rowBankAccount['account_id'], $rowBankAccount['acc_name'], $receiving_acc_no, $rowBankAccount['acc_type'], $trType, $tr_status, $rowBankAccount['client_id'], $rowBankAccount['client_name'], $rowBankAccount['client_national_id'], $transaction_amt, $rowBankAccount['client_phone'], $account_number, $acc_name, $acc_name);
+                $stmtTransfer->execute();
+            }
+
+            // Check if insertion was successful
+            if ($stmt && $notification_stmt) {
+                $success = "Money Transferred";
+            } else {
+                $err = "Please Try Again Or Try Later";
+            }
         }
     }
 }
-
-
-
 ?>
+
+
 <!-- Log on to codeastro.com for more projects! -->
 <!DOCTYPE html>
 <html>
@@ -204,7 +187,7 @@ if (isset($_POST['deposit'])) {
                                                 </div>
 
                                                 <div class=" col-md-6 form-group">
-                                                    <label for="exampleInputPassword1">Amount Transfered($)</label>
+                                                    <label for="exampleInputPassword1">Amount Transfered(Rs.)</label>
                                                     <input type="text" name="transaction_amt" required class="form-control" id="exampleInputEmail1">
                                                 </div>
                                             </div>
@@ -290,6 +273,12 @@ if (isset($_POST['deposit'])) {
             bsCustomFileInput.init();
         });
     </script>
+    <script>
+    if (typeof alertMessage !== 'undefined') {
+        alert(alertMessage);
+    }
+</script>
+
 </body>
 
 </html>

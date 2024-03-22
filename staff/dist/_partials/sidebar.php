@@ -150,7 +150,7 @@
             <!--./ iBank Acounts-->
 
             <!--Finances-->
-            <li class="nav-item has-treeview">
+            <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-dollar-sign"></i>
                 <p>
@@ -176,7 +176,8 @@
                     <i class="fas fa-random nav-icon"></i>
                     <p>Transfers</p>
                   </a>
-                </li>
+                </li> -->
+                
                 <!--
               <li class="nav-item">
                 <a href="pages_loans.php" class="nav-link">
@@ -185,14 +186,14 @@
                 </a>
               </li>
               -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="pages_balance_enquiries.php" class="nav-link">
                     <i class="fas fa-money-bill-alt nav-icon"></i>
                     <p>Balance Enquiries</p>
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <!-- ./Finances -->
 
             <li class="nav-header">Advanced Modules</li>

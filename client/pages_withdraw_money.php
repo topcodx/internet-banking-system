@@ -6,61 +6,53 @@ check_login();
 $client_id = $_SESSION['client_id'];
 
 if (isset($_POST['withdrawal'])) {
-    $tr_code = $_POST['tr_code'];
-    $account_id = $_GET['account_id'];
-    $acc_name = $_POST['acc_name'];
-    $account_number = $_GET['account_number'];
-    $acc_type = $_POST['acc_type'];
-    //$acc_amount  = $_POST['acc_amount'];
-    $tr_type  = $_POST['tr_type'];
-    $tr_status = $_POST['tr_status'];
-    $client_id  = $_GET['client_id'];
-    $client_name  = $_POST['client_name'];
-    $client_national_id  = $_POST['client_national_id'];
     $transaction_amt = $_POST['transaction_amt'];
-    $client_phone = $_POST['client_phone'];
-    //$acc_new_amt = $_POST['acc_new_amt'];
-    //$notification_details = $_POST['notification_details'];
-    $notification_details = "$client_name Has Withdrawn $ $transaction_amt From Bank Account $account_number";
 
-    /*
-    * The below code will handle the withdrwawal process that is first it 
-      checks if the selected back account has the any amount and secondly the money withdrawed should 
-      no be be greater than the existing amount.
-    *   
-    */
-
-    $result = "SELECT SUM(transaction_amt) FROM  ib_transactions  WHERE account_id=?";
-    $stmt = $mysqli->prepare($result);
-    $stmt->bind_param('i', $account_id);
-    $stmt->execute();
-    $stmt->bind_result($amt);
-    $stmt->fetch();
-    $stmt->close();
-
-
-    if ($transaction_amt > $amt) {
-        $err = "You Do Not Have Sufficient Funds In Your Account.Your Existing Amount is $ $amt";
+    // Validate transaction amount
+    if ($transaction_amt <= 0) {
+        $err = "Please enter a valid amount greater than 0.";
     } else {
+        $tr_code = $_POST['tr_code'];
+        $account_id = $_GET['account_id'];
+        $acc_name = $_POST['acc_name'];
+        $account_number = $_GET['account_number'];
+        $acc_type = $_POST['acc_type'];
+        $tr_type = $_POST['tr_type'];
+        $tr_status = $_POST['tr_status'];
+        $client_id = $_GET['client_id'];
+        $client_name = $_POST['client_name'];
+        $client_national_id = $_POST['client_national_id'];
+        $client_phone = $_POST['client_phone'];
+        $notification_details = "$client_name Has Withdrawn $transaction_amt From Bank Account $account_number";
 
-
-        //Insert Captured information to a database table
-        $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-        $notification = "INSERT INTO  ib_notifications (notification_details) VALUES (?)";
-        $stmt = $mysqli->prepare($query);
-        $notification_stmt = $mysqli->prepare($notification);
-        //bind paramaters
-        $rc = $stmt->bind_param('ssssssssssss', $tr_code, $account_id, $acc_name, $account_number, $acc_type, $tr_type, $tr_status, $client_id, $client_name, $client_national_id, $transaction_amt, $client_phone);
-        $rc = $notification_stmt->bind_param('s', $notification_details);
+        $result = "SELECT SUM(transaction_amt) FROM ib_transactions WHERE account_id=?";
+        $stmt = $mysqli->prepare($result);
+        $stmt->bind_param('i', $account_id);
         $stmt->execute();
-        $notification_stmt->execute();
-        //declare a varible which will be passed to alert function
-        if ($stmt && $notification_stmt) {
-            $success = "Funds Withdrawled";
-        } else {
-            $err = "Please Try Again Or Try Later";
-        }
+        $stmt->bind_result($amt);
+        $stmt->fetch();
+        $stmt->close();
 
+        if ($transaction_amt > $amt) {
+            $err = "You Do Not Have Sufficient Funds In Your Account. Your Existing Amount is $$amt";
+        } else {
+            $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type, tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            $notification = "INSERT INTO ib_notifications (notification_details) VALUES (?)";
+            $stmt = $mysqli->prepare($query);
+            $notification_stmt = $mysqli->prepare($notification);
+            $rc = $stmt->bind_param('ssssssssssss', $tr_code, $account_id, $acc_name, $account_number, $acc_type, $tr_type, $tr_status, $client_id, $client_name, $client_national_id, $transaction_amt, $client_phone);
+            $rc = $notification_stmt->bind_param('s', $notification_details);
+            $stmt->execute();
+            $notification_stmt->execute();
+
+            if ($stmt && $notification_stmt) {
+                $success = "Funds Withdrawn";
+            } else {
+                $err = "Please Try Again Or Try Later";
+            }
+        }
+    }
+}
         /*
     if(isset($_POST['deposit']))
     {
@@ -85,8 +77,6 @@ if (isset($_POST['withdrawal'])) {
         }   
     }   
     */
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
