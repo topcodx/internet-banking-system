@@ -1,32 +1,6 @@
 <?php
 session_start();
 include('conf/config.php');
-
-//register new account
-// if (isset($_POST['create_account'])) {
-//   //Register Client
-//   $name = $_POST['name'];
-//   $national_id = $_POST['national_id'];
-//   $client_number = $_POST['client_number'];
-//   $phone = $_POST['phone'];
-//   $email = $_POST['email'];
-//   $password = sha1(md5($_POST['password']));
-//   $address  = $_POST['address'];
-
-//   //Insert Captured information to a database table
-//   $query = "INSERT INTO ib_client (name, national_id, client_number, phone, email, password, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
-//   $stmt = $mysqli->prepare($query);
-//   //bind parameters
-//   $stmt->bind_param('sssssss', $name, $national_id, $client_number, $phone, $email, $password, $address);
-//   $stmt->execute();
-
-//   //declare a varible which will be passed to alert function
-//   if ($stmt) {
-//     $success = "Account Created";
-//   } else {
-//     $err = "Please Try Again Or Try Later";
-//   }
-// }
 if (isset($_POST['create_account'])) {
   // Validate phone number
   $phone = $_POST['phone'];
