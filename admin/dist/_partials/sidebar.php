@@ -183,7 +183,7 @@
                   Finances
                   <i class="fas fa-angle-left right"></i>
                 </p>
-              </a> -->
+              </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="pages_deposits.php" class="nav-link">
@@ -197,7 +197,7 @@
                     <p>Withdrawals</p>
                   </a>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                   <a href="pages_transfers.php" class="nav-link">
                     <i class="fas fa-random nav-icon"></i>
                     <p>Transfers</p>
@@ -209,7 +209,7 @@
                   <i class="fas fa-cart-arrow-down nav-icon"></i>
                   <p>Loans</p>
                 </a>
-              </li> -->
+              </li>
 
              
                 <li class="nav-item">
@@ -219,7 +219,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li > -->
             <!-- ./Finances -->
 
             <!--Statements-- Will be implemented later versions.
@@ -242,7 +242,6 @@
             </ul>
           </li>
           ./Statements -->
-
 
             <li class="nav-header">Advanced Modules</li>
             <li class="nav-item">

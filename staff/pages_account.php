@@ -145,7 +145,7 @@ if (isset($_POST['change_staff_password'])) {
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Gender: </b> <a class="float-right"><?php echo $row->sex; ?></a>
-                                            </li>
+                                            </li>   
 
                                         </ul>
 
@@ -239,6 +239,8 @@ if (isset($_POST['change_staff_password'])) {
                                                         <label for="inputName2" class="col-sm-2 col-form-label">Gender</label>
                                                         <div class="col-sm-10">
                                                             <select class="form-control" name="sex">
+                                                            <option>---Select Gender---</option>
+                                                                
                                                                 <option>Male</option>
                                                                 <option>Female</option>
                                                             </select>

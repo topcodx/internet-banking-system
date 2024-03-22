@@ -5,47 +5,47 @@ include('conf/checklogin.php');
 check_login();
 
 if (isset($_POST['deposit'])) {
-    
-    $tr_code = $_POST['tr_code'];
-    $account_id = $_GET['account_id'];
-    $acc_name = $_POST['acc_name'];
-    $account_number = $_GET['account_number'];
-
-    $acc_type = $_POST['acc_type'];
-    // $acc_amount  = $_POST['acc_amount'];
-    $tr_type  = $_POST['tr_type'];
-    $tr_status = $_POST['tr_status'];
-    $client_id  = $_GET['client_id'];
-
-    $client_name  = $_POST['client_name'];
-    $client_national_id  = $_POST['client_national_id'];
     $transaction_amt = $_POST['transaction_amt'];
-    $client_phone = $_POST['client_phone'];
-    //$acc_new_amt = $_POST['acc_new_amt'];
 
-    //Notication
-    $notification_details = "$client_name Has Deposited $ $transaction_amt To Bank Account $account_number";
-
-
-    //Insert Captured information to a database table
-    $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type,  tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-    $notification = "INSERT INTO  ib_notifications (notification_details) VALUES (?)";
-
-    $stmt = $mysqli->prepare($query);
-    $notification_stmt = $mysqli->prepare($notification);
-
-    //bind paramaters
-    $rc = $notification_stmt->bind_param('s', $notification_details);
-    $rc = $stmt->bind_param('ssssssssssss', $tr_code, $account_id, $acc_name, $account_number, $acc_type, $tr_type, $tr_status, $client_id, $client_name, $client_national_id, $transaction_amt, $client_phone);
-    $stmt->execute();
-    $notification_stmt->execute();
-
-
-    //declare a varible which will be passed to alert function
-    if ($stmt && $notification_stmt) {
-        $success = "Money Deposited";
+    // Validate transaction amount
+    if ($transaction_amt <= 0) {
+        $err = "Please enter a valid amount greater than 0.";
     } else {
-        $err = "Please Try Again Or Try Later";
+        // Proceed with the deposit process
+        $tr_code = $_POST['tr_code'];
+        $account_id = $_GET['account_id'];
+        $acc_name = $_POST['acc_name'];
+        $account_number = $_GET['account_number'];
+        $acc_type = $_POST['acc_type'];
+        $tr_type = $_POST['tr_type'];
+        $tr_status = $_POST['tr_status'];
+        $client_id = $_GET['client_id'];
+        $client_name = $_POST['client_name'];
+        $client_national_id = $_POST['client_national_id'];
+        $client_phone = $_POST['client_phone'];
+
+        // Notification details
+        $notification_details = "$client_name has deposited $transaction_amt to bank account $account_number";
+
+        // Insert captured information to the database table
+        $query = "INSERT INTO ib_transactions (tr_code, account_id, acc_name, account_number, acc_type, tr_type, tr_status, client_id, client_name, client_national_id, transaction_amt, client_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        $notification = "INSERT INTO ib_notifications (notification_details) VALUES (?)";
+
+        $stmt = $mysqli->prepare($query);
+        $notification_stmt = $mysqli->prepare($notification);
+
+        // Bind parameters
+        $rc = $notification_stmt->bind_param('s', $notification_details);
+        $rc = $stmt->bind_param('ssssssssssss', $tr_code, $account_id, $acc_name, $account_number, $acc_type, $tr_type, $tr_status, $client_id, $client_name, $client_national_id, $transaction_amt, $client_phone);
+        $stmt->execute();
+        $notification_stmt->execute();
+
+        // Check if insertion was successful
+        if ($stmt && $notification_stmt) {
+            $success = "Money deposited successfully.";
+        } else {
+            $err = "Please try again or try later.";
+        }
     }
 }
 /*

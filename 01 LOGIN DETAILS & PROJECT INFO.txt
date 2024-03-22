@@ -20,4 +20,3 @@ Password: codeastro.com
 
 
 *********** test key ************
-rzp_test_j0MoZqbuOl3ugQ
